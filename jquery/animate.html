@@ -16,11 +16,12 @@
 <button id="btnFadeTo">fadeTo</button>
 <button id="btnSlide">slideToggle</button>
 <button id="btnAnimate">animate</button>
+<button id="btnChain">chaining</button>
 <br>
 <button id="btnStop" style="width:400px">STOP</button>
 
 <div id="foo"
-     style="width: 300px; height: 160px; position: absolute; left: 10px; top: 100px; background-color: limegreen">
+     style="width: 300px; height: 160px; position: absolute; left: 10px; top: 100px; padding: 10px; background-color: limegreen">
   foobar
 </div>
 
@@ -60,9 +61,9 @@
     $('button#btnAnimate').click(function () {
       if ($('#foo').css('left') != '10px') {
         $('#foo').animate({width: '300px'}, 'slow');
-        $('#foo').animate({height: '160px'}, 'slow');
-        $('#foo').animate({opacity: '1'}, 'slow');
-        $('#foo').animate({left: '10px'}, 'slow');
+        $('#foo').animate({height: '160px'}, 'normal');
+        $('#foo').animate({opacity: '1'}, 'fast');
+        $('#foo').animate({left: '10px'}, 3000);
       } else {
         $('#foo').animate({
           left: '+=400px',
@@ -75,10 +76,16 @@
       }
     });
 
-    $('button#btnstop').click(function () {
+    $('button#btnStop').click(function () {
       var stopAll = true;
       var goToEnd = false;
       $('#foo').stop(stopAll, goToEnd);
+    });
+
+    $('button#btnChain').click(function () {
+      $('#foo').css('color', 'red')
+          .slideUp(1000)
+          .slideDown(300);
     });
   });
 </script>
