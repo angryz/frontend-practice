@@ -1,0 +1,37 @@
+<html>
+<head>
+  <title>Practice jQuery</title>
+</head>
+
+<body>
+
+<button id="btnHide">hideToggle</button>
+<button id="btnFade">fadeToggle</button>
+<button id="btnFadeTo">fadeTo</button>
+<div id="foo" style="width: 300px; height: 160px; background-color: limegreen"></div>
+
+<!--<div id="bar" style="width: 300px; height: 160px; background-color: yellow"></div>-->
+</body>
+
+<script type="text/javascript" src="https://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript">
+  $(function () {
+
+    $('button#btnHide').click(function () {
+      $('#foo').toggle(1000, function () {
+        console.log("hide toggle done");
+      });
+    });
+
+    $('button#btnFade').click(function () {
+      $('#foo').fadeToggle(1000, function () {
+        console.log("hide toggle done");
+      });
+    });
+
+    $('button#btnFadeTo').click(function () {
+      $('#foo').fadeTo('slow', 0.2);
+    });
+  });
+</script>
+</html>
