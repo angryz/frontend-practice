@@ -4,15 +4,48 @@
 </head>
 
 <body>
-  <p>Click on me!</p>
+<p>Click on me!</p>
+
+<button id="fooBtn1">hide</button>
+<button id="fooBtn2">hide</button>
+<button id="fooBtn3">click</button>
+<div id="foo" style="width: 300px; height: 160px; background-color: limegreen"></div>
+
+<!--<div id="bar" style="width: 300px; height: 160px; background-color: yellow"></div>-->
 </body>
 
 <script type="text/javascript" src="https://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
 <script type="text/javascript">
-$(function(){
-  $('p').click(function(){
-    $(this).hide();
+  $(function () {
+    $('p').css('background-color', 'red');
+
+    $('body').append('<p>$(this) : ' + $(this) + '</p>');
+
+    $('p').click(function () {
+      $(this).hide();
+    });
+
+    $('button#fooBtn1').click(function () {
+      $('#foo').toggle(1000, function () {
+        if ($('button#fooBtn1').text() === 'hide')
+          $('button#fooBtn1').text('show');
+        else
+          $('button#fooBtn1').text('hide');
+      });
+    });
+
+    $('button#fooBtn2').click(function () {
+      $('#foo').fadeToggle(1000, function () {
+        if ($('button#fooBtn2').text() === 'hide')
+          $('button#fooBtn2').text('show');
+        else
+          $('button#fooBtn2').text('hide');
+      });
+    });
+
+    $('button#fooBtn3').click(function () {
+      $('#foo').fadeTo('slow', 0.2);
+    });
   });
-});
 </script>
 </html>
