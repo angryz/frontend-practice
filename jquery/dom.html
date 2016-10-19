@@ -21,11 +21,21 @@
 <button id="btnSetHtml">set html</button>
 <button id="btnSetVal">set val</button>
 <button id="btnSetAttr">set attr</button>
+<br>
+<button id="btnAppend">append</button>
+<button id="btnPrepend">prepend</button>
+<button id="btnAfter">after</button>
+<button id="btnBefore">before</button>
+<br>
+<button id="btnRemove">remove</button>
+<button id="btnEmpty">empty</button>
+<br>
 
 <div id="foo"
      style="width: 300px; height: 160px; margin: 10px 0; padding: 10px; border: 1px solid red">
   <p>foobar</p>
 </div>
+<br>
 <input type="text" value="hello there" size="30">
 </body>
 
@@ -70,6 +80,38 @@
       console.log('index: ' + i);
       return parseInt(origin) + 5;
     })
+  });
+
+  $('#btnAppend').click(function () {
+    var e1 = '<b>I</b> ';
+    var e2 = $('<i></i>').text('love ');
+    var e3 = document.createTextNode('you.');
+    $('#foo').append(e1, e2, e3);
+  });
+  $('#btnPrepend').click(function () {
+    var e1 = '<b>I</b> ';
+    var e2 = $('<i></i>').text('love ');
+    var e3 = document.createTextNode('you.');
+    $('#foo').prepend(e1, e2, e3);
+  });
+  $('#btnAfter').click(function () {
+    var e1 = '<b>I</b> ';
+    var e2 = $('<i></i>').text('love ');
+    var e3 = document.createTextNode('you.');
+    $('#foo').after(e1, e2, e3);
+  });
+  $('#btnBefore').click(function () {
+    var e1 = '<b>I</b> ';
+    var e2 = $('<i></i>').text('love ');
+    var e3 = document.createTextNode('you.');
+    $('#foo').before(e1, e2, e3);
+  });
+
+  $('#btnRemove').click(function () {
+    $('input').remove();
+  });
+  $('#btnEmpty').click(function () {
+    $('#foo').empty();
   });
 </script>
 </html>
