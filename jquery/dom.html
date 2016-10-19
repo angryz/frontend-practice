@@ -14,11 +14,19 @@
 <body>
 <button id="btnText">text</button>
 <button id="btnHtml">html</button>
+<button id="btnVal">val</button>
+<button id="btnAttr">attr</button>
+<br>
+<button id="btnSetText">set text</button>
+<button id="btnSetHtml">set html</button>
+<button id="btnSetVal">set val</button>
+<button id="btnSetAttr">set attr</button>
 
 <div id="foo"
-     style="width: 300px; height: 160px; position: absolute; left: 10px; top: 100px; padding: 10px; border: 1px solid red">
+     style="width: 300px; height: 160px; margin: 10px 0; padding: 10px; border: 1px solid red">
   <p>foobar</p>
 </div>
+<input type="text" value="hello there" size="30">
 </body>
 
 <script type="text/javascript" src="https://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
@@ -29,6 +37,39 @@
 
   $('#btnHtml').click(function () {
     console.log('Html: ' + $('#foo').html());
+  });
+
+  $('#btnVal').click(function () {
+    console.log('Val: ' + $('input').val());
+  });
+
+  $('#btnAttr').click(function () {
+    console.log('Attr: ' + $('#foo').attr('style'));
+  });
+
+  $('#btnSetText').click(function () {
+    $('#foo').text(function (i, origText) {
+      return "Old Text: " + origText + "  New Text: " + origText.toUpperCase()
+          + " Index: " + i;
+    });
+  });
+
+  $('#btnSetHtml').click(function () {
+    $('#foo').html(function (i, origHtml) {
+      return "Old Html: " + origHtml + "  New Html: <b>Muahahahaha</b>"
+          + " Index: " + i;
+    });
+  });
+
+  $('#btnSetVal').click(function () {
+    $('input').val('ooh yeah!');
+  });
+
+  $('#btnSetAttr').click(function () {
+    $('input').attr('size', function (i, origin) {
+      console.log('index: ' + i);
+      return parseInt(origin) + 5;
+    })
   });
 </script>
 </html>
