@@ -1,6 +1,12 @@
 <html>
 <head>
   <title>Practice jQuery</title>
+  <style type="text/css">
+    button {
+      height: 30px;
+      margin: 2px 0;
+    }
+  </style>
 </head>
 
 <body>
@@ -10,6 +16,9 @@
 <button id="btnFadeTo">fadeTo</button>
 <button id="btnSlide">slideToggle</button>
 <button id="btnAnimate">animate</button>
+<br>
+<button id="btnStop" style="width:400px">STOP</button>
+
 <div id="foo"
      style="width: 300px; height: 160px; position: absolute; left: 10px; top: 100px; background-color: limegreen">
   foobar
@@ -64,6 +73,12 @@
           console.log('animate done')
         })
       }
+    });
+
+    $('button#btnstop').click(function () {
+      var stopAll = true;
+      var goToEnd = false;
+      $('#foo').stop(stopAll, goToEnd);
     });
   });
 </script>
