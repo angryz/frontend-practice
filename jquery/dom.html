@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Practice jQuery - DOM</title>
+  <style type="text/css">
+    button {
+      height: 30px;
+      margin: 2px 0;
+    }
+  </style>
+</head>
+
+<body>
+<button id="btnText">text</button>
+<button id="btnHtml">html</button>
+
+<div id="foo"
+     style="width: 300px; height: 160px; position: absolute; left: 10px; top: 100px; padding: 10px; border: 1px solid red">
+  <p>foobar</p>
+</div>
+</body>
+
+<script type="text/javascript" src="https://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript">
+  $('#btnText').click(function () {
+    console.log('Text: ' + $('#foo').text());
+  });
+
+  $('#btnHtml').click(function () {
+    console.log('Html: ' + $('#foo').html());
+  });
+</script>
+</html>
