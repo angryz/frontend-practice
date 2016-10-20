@@ -12,12 +12,16 @@
     .blue {
       color: blue;
     }
+
     button {
       height: 30px;
       margin: 2px 0;
     }
+
     div {
       border: 1px solid #999;
+      padding: 10px;
+      margin: 5px 0;
     }
   </style>
 </head>
@@ -33,6 +37,8 @@
 <br>
 <button id="getCss">get css</button>
 <button id="setCss">set css</button>
+<button id="getSize">get size</button>
+<button id="setSize">set size</button>
 </body>
 
 <script type="text/javascript" src="https://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
@@ -50,7 +56,7 @@
   });
 
   $('button#getCss').click(function () {
-    $('#div1').append('<p>color: ' + $('#div1').css('color'));
+    $('#div1').append('<p>color: ' + $('#div1').css('color') + '</p>');
   });
   $('button#setCss').click(function () {
     $('div').css('background-color', 'yellow');
@@ -58,6 +64,17 @@
       'color': 'red',
       'font-size': '3em'
     });
+  });
+  $('button#getSize').click(function () {
+    $('#div1').append('<p>width: ' + $('#div1').width() + '<br>'
+        + 'height: ' + $('#div1').height() + '<br>'
+        + 'innerWidth: ' + $('#div1').innerWidth() + '<br>'
+        + 'innerHeight: ' + $('#div1').innerHeight() + '<br>'
+        + 'outerWidth: ' + $('#div1').outerWidth() + '<br>'
+        + 'outerHeight: ' + $('#div1').outerHeight() + '</p>');
+  });
+  $('button#setSize').click(function () {
+    $('#div1').width(800).height(600);
   });
 </script>
 </html>
