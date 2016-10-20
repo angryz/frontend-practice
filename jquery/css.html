@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Practice jQuery - CSS</title>
+  <style type="text/css">
+    .important {
+      font-weight: bold;
+      font-size: xx-large;
+    }
+
+    .blue {
+      color: blue;
+    }
+  </style>
+</head>
+<body>
+<h1>Hello jQuery</h1>
+<h2>foobar</h2>
+<p>never give up!</p>
+<div>Rock and Roll</div>
+<button>click</button>
+</body>
+
+<script type="text/javascript" src="https://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript">
+  $('button').click(function () {
+    $('h1,h2,p').addClass('blue');
+    $('div').addClass('important');
+  });
+</script>
+</html>
