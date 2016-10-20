@@ -12,6 +12,13 @@
     .blue {
       color: blue;
     }
+    button {
+      height: 30px;
+      margin: 2px 0;
+    }
+    div {
+      border: 1px solid #999;
+    }
   </style>
 </head>
 <body>
@@ -23,6 +30,9 @@
 <button id="addClass">add</button>
 <button id="delClass">del</button>
 <button id="toggleClass">toggle</button>
+<br>
+<button id="getCss">get css</button>
+<button id="setCss">set css</button>
 </body>
 
 <script type="text/javascript" src="https://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
@@ -37,6 +47,17 @@
   });
   $('button#toggleClass').click(function () {
     $('h1,h2,p').toggleClass('blue');
+  });
+
+  $('button#getCss').click(function () {
+    $('#div1').append('<p>color: ' + $('#div1').css('color'));
+  });
+  $('button#setCss').click(function () {
+    $('div').css('background-color', 'yellow');
+    $('#div1').css({
+      'color': 'red',
+      'font-size': '3em'
+    });
   });
 </script>
 </html>
