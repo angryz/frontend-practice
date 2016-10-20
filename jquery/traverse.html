@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Practice jQuery - traversing</title>
+  <style type="text/css">
+    div {
+      border: 1px solid #999;
+      padding: 10px;
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+<div>
+  <ul>
+    <li>
+      <span>hello foobar</span>
+      <span>good job</span>
+    </li>
+    <li>
+      <b>let's rock</b>
+    </li>
+  </ul>
+</div>
+<div id="#output"></div>
+</body>
+
+<script type="text/javascript" src="https://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript">
+  ;$(function () {
+    console.log('parent of span: ');
+    console.log($('span').parent());
+    $('#output').append('<p>parent of span: ' + $('span').parent() + '</p>');
+    console.log('parents of span: ');
+    console.log($('span').parents());
+    $('#output').append('<p>parents of span: ' + $('span').parents() + '</p>');
+    console.log('parents ul of span: ');
+    console.log($('span').parents('ul'));
+    $('#output').append('<p>parents ul of span: ' + $('span').parents('ul') + '</p>');
+    console.log('parents of span until div: ');
+    console.log($('span').parentsUntil('div'));
+    $('#output').append('<p>parents of span until div: ' + $('span').parentsUntil('div') + '</p>');
+  });
+</script>
+</html>
