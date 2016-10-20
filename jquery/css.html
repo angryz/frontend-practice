@@ -19,14 +19,24 @@
 <h2>foobar</h2>
 <p>never give up!</p>
 <div>Rock and Roll</div>
-<button>click</button>
+<div id="div1">something very important</div>
+<button id="addClass">add</button>
+<button id="delClass">del</button>
+<button id="toggleClass">toggle</button>
 </body>
 
 <script type="text/javascript" src="https://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
 <script type="text/javascript">
-  $('button').click(function () {
+  $('button#addClass').click(function () {
     $('h1,h2,p').addClass('blue');
     $('div').addClass('important');
+    $('#div1').addClass('important blue');
+  });
+  $('button#delClass').click(function () {
+    $('h1,h2,p').removeClass('blue');
+  });
+  $('button#toggleClass').click(function () {
+    $('h1,h2,p').toggleClass('blue');
   });
 </script>
 </html>
