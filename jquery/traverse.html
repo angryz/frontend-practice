@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Practice jQuery - traversing</title>
   <style type="text/css">
-    div {
+    pre {
       border: 1px solid #999;
       padding: 10px;
       margin: 5px 0;
@@ -22,8 +22,13 @@
       <b>let's rock</b>
     </li>
   </ul>
+  <p class="one">p</p>
+  <h2>h2</h2>
+  <h3>h3</h3>
+  <h4>h4</h4>
+  <p class="two">p</p>
 </div>
-<div id="#output"></div>
+<pre id="#output"></pre>
 </body>
 
 <script type="text/javascript" src="https://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
@@ -32,15 +37,61 @@
     console.log('parent of span: ');
     console.log($('span').parent());
     $('#output').append('<p>parent of span: ' + $('span').parent() + '</p>');
+
     console.log('parents of span: ');
     console.log($('span').parents());
     $('#output').append('<p>parents of span: ' + $('span').parents() + '</p>');
+
     console.log('parents ul of span: ');
     console.log($('span').parents('ul'));
     $('#output').append('<p>parents ul of span: ' + $('span').parents('ul') + '</p>');
+
     console.log('parents of span until div: ');
     console.log($('span').parentsUntil('div'));
     $('#output').append('<p>parents of span until div: ' + $('span').parentsUntil('div') + '</p>');
+
+    console.log('children of div: ');
+    console.log($('div').children());
+    $('#output').append('<p>children of div: ' + $('div').children() + '</p>');
+
+    console.log('children of div which is p.one: ');
+    console.log($('div').children('p.one'));
+    $('#output').append('<p>children of div which is p.one: ' + $('div').children('p.one') + '</p>');
+
+    console.log('children or grandchildren of div which is span: ');
+    console.log($('div').children().find('span'));
+    $('#output').append('<p>children or grandchildren of div which is span: ' + $('div').children().find('span') + '</p>');
+
+    console.log('children and grandchildren of div: ');
+    console.log($('div').find('*'));
+    $('#output').append('<p>children and grandchildren of div: ' + $('div').find('*') + '</p>');
+
+    console.log('siblings of p.one: ');
+    console.log($('p.one').siblings());
+
+    console.log('next sibling of p.one: ');
+    console.log($('p.one').next());
+
+    console.log('all next siblings of p.one: ');
+    console.log($('p.one').nextAll());
+
+    console.log('all next siblings of p.one until h4: ');
+    console.log($('p.one').nextUntil('h4'));
+
+    console.log('first p in div: ');
+    console.log($('div p').first());
+
+    console.log('last p in div: ');
+    console.log($('div p').last());
+
+    console.log('second p: ');
+    console.log($('p').eq(1));
+
+    console.log('p with class one: ');
+    console.log($('p').filter('.one'));
+
+    console.log('p without class one: ');
+    console.log($('p').not('.one'));
   });
 </script>
 </html>
