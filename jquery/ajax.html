@@ -14,7 +14,9 @@
 <body>
 <div id="div1"></div>
 <div id="div2"></div>
-<button>load</button>
+<button id="load">load</button>
+<button id="get">get</button>
+<button id="post">post</button>
 <div id="div3"></div>
 </body>
 
@@ -26,13 +28,33 @@
     $('#div2').load('ajax_demo.txt #p1');
   })
 
-  $('button').click(function () {
+  $('#load').click(function () {
+    $('#div3').children().remove();
     $('#div3').load('ajax_demo1.txt', function (responseTxt, statusTxt, xhr) {
       if (statusTxt == 'success')
         alert('外部内容加载成功');
       if (statusTxt == 'error')
         alert('Error: ' + xhr.status + ': ' + xhr.statusText);
     });
+  });
+
+  $('#get').click(function () {
+    $('#div3').children().remove();
+    $.get('ajax_demo.txt', function (data, status) {
+      $('#div3').append('<p>Data: ' + data + '<br>Status:' + status + '</p>');
+    });
+  });
+
+  $('#post').click(function () {
+    $('#div3').children().remove();
+    $.get('ajax_demo.json',
+        {
+          name: "Donald Duck",
+          city: "Duckburg"
+        },
+        function (data, status) {
+          $('#div3').append('<p>Data: ' + data.greeting + '<br>Status:' + status + '</p>');
+        });
   });
 </script>
 </html>
