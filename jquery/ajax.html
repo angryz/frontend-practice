@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Practice jQuery - Ajax</title>
+</head>
+<style type="text/css">
+  div {
+    border: 1px solid #999;
+    padding: 10px;
+    margin: 5px 0;
+  }
+</style>
+<body>
+<div id="div1"></div>
+<div id="div2"></div>
+<button>load</button>
+<div id="div3"></div>
+</body>
+
+<script type="text/javascript" src="https://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript">
+  $(function () {
+    $('#div1').load('ajax_demo.txt');
+
+    $('#div2').load('ajax_demo.txt #p1');
+  })
+
+  $('button').click(function () {
+    $('#div3').load('ajax_demo1.txt', function (responseTxt, statusTxt, xhr) {
+      if (statusTxt == 'success')
+        alert('外部内容加载成功');
+      if (statusTxt == 'error')
+        alert('Error: ' + xhr.status + ': ' + xhr.statusText);
+    });
+  });
+</script>
+</html>
