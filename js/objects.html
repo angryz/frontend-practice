@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Objects</title>
+</head>
+<body>
+<h1>创建对象</h1>
+<p>
+<ul>
+  <li>对象直接量</li>
+  <li>构造函数</li>
+  <li>原型继承</li>
+</ul>
+</p>
+
+<h1>类继承</h1>
+<p>
+  JavaScript对象拥有自有属性和继承属性。
+<ul>
+  <li>在查询对象o的属性x时，先查找o中的属性x，如果没找到，则查找o的原型对象中的x属性，直到查找到x或者一个原型是null的对象为止</li>
+  <li>在给对象o的x属性赋值时，如果o中已经有一个自有属性x，则改变x的值，若o中不存在属性x，则为o创建一个x属性并赋值</li>
+  <li>也就是说，只有在查询时原型链才会起作用。</li>
+</ul>
+</p>
+</body>
+<script type="text/javascript">
+  // 创建对象
+  var x = {
+    foo: "bar"
+  };
+  console.log(x);
+
+  var y = new Object(x);
+  console.log(y);
+
+  var z = Object.create(y);
+  console.log(z);
+
+  // 类继承
+  var O = {
+    x: 1
+  };
+
+  function P() {
+    this.y = 2;
+  }
+
+  P.prototype = O;
+
+  var t = new P();
+
+  console.log(t);
+  console.log('x' in t);
+  console.log(t.hasOwnProperty('x'));
+</script>
+</html>
