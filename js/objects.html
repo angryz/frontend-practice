@@ -23,6 +23,26 @@
   <li>也就是说，只有在查询时原型链才会起作用。</li>
 </ul>
 </p>
+
+<h1>对象属性</h1>
+<p>
+<ul>
+  <li>遍历对象属性: for..in</li>
+  <li>对象属性的特性: Object.getOwnPropertyDescriptor(), Object.defineProperty()</li>
+  <li>get/set</li>
+</ul>
+</p>
+
+<h1>对象方法</h1>
+<p>
+<ul>
+  <li>toString</li>
+  <li>valueOf</li>
+</ul>
+</p>
+
+<h1>可执行对象</h1>
+
 </body>
 <script type="text/javascript">
   // 创建对象
@@ -51,7 +71,53 @@
   var t = new P();
 
   console.log(t);
-  console.log('x' in t);
-  console.log(t.hasOwnProperty('x'));
+  console.log('x' in t);//true
+  console.log(t.hasOwnProperty('x'));//false
+
+  //对象属性
+  console.log(Object.getOwnPropertyDescriptor(x, 'foo'));
+  Object.defineProperty(x, 'foo', {writable: false});
+  console.log(Object.getOwnPropertyDescriptor(x, 'foo'));
+  x.foo = 'world';
+  console.log(x.foo);
+
+  var book = {
+    _year: 2015,
+    edition: 1
+  };
+  Object.defineProperty(book, 'year', {
+    get: function () {
+      console.log('get year');
+      return this._year;
+    },
+    set: function (newValue) {
+      console.log('set year: ' + newValue);
+      if (newValue > 2015) {
+        this._year = newValue;
+        this.edition = newValue - 2015;
+      }
+    }
+  });
+  console.log(Object.getOwnPropertyDescriptor(book, 'year'));
+
+  //对象方法
+  book.toString = function () {
+    return JSON.stringify(this);
+  };
+  console.log(book.toString());
+
+
+  //可执行对象
+  function bar(o) {
+    var f = function () { return "Hello World!"; }
+    o.__proto__ = f.__proto__;
+    f.__proto__ = o;
+    return f;
+  }
+  var o = { x: 5 };
+  var foo = bar(o);
+  console.log(foo());
+  console.log(foo.x);
+  console.log(typeof foo);
 </script>
 </html>
