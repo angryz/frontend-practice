@@ -19,18 +19,42 @@
     var v = "Hello World";
   }
 
-  //withoutVar = "Hello World!"; // Throw ReferenceError
+
+  withoutVar = "Hello World!"; // Throw ReferenceError
+
 
   var o = {};
   Object.defineProperty(o, "hello", {value: "world", writable: false});
-  //o.hello = "Type Error"; // Throw TypeError
+  o.hello = "Type Error"; // Throw TypeError
 
-  //delete Object.prototype; // Throw TypeError
+  delete Object.prototype; // Throw TypeError
 
-  var fun = function() {
+  var fun = function () {
     return arguments.callee; // Throw TypeError
   }
-  //fun();
+  fun();
 
+
+  var o1 = {hello: 1, hello: 2}; // SyntaxError: 重复定义属性名
+
+  var hello = 015; // SyntaxError: 禁用八进制字面量
+
+  function myFunc(a, b, b) { // SyntaxError: 重复参数名
+    "use strict";
+  }
+
+  var o2 = {};
+  with (o2) { // SyntaxError: 禁用 with
+  }
+
+  var fun = function () {
+    eval = 16; // SyntaxError: 禁止对 eval 或 arguments 赋值
+  }();
+
+  var fun = function () {
+    var obj = {
+      set p(arguments) { } // SyntaxError: 不可将 eval 或 arguments 作为参数名、变量名
+    };
+  }();
 </script>
 </html>
