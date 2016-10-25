@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Strict Mode</title>
+</head>
+<body>
+<p>
+  "use strict"
+</p>
+</body>
+<script type="text/javascript">
+  // global strict mode
+  "use strict";
+
+  // partial strict mode
+  function mySuperMethod() {
+    "use strict";
+    var v = "Hello World";
+  }
+
+  //withoutVar = "Hello World!"; // Throw ReferenceError
+
+  var o = {};
+  Object.defineProperty(o, "hello", {value: "world", writable: false});
+  //o.hello = "Type Error"; // Throw TypeError
+
+  //delete Object.prototype; // Throw TypeError
+
+  var fun = function() {
+    return arguments.callee; // Throw TypeError
+  }
+  //fun();
+
+</script>
+</html>
