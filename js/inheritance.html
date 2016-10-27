@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Prototypal Inheritance</title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+  // 访问构造函数的原型
+  console.log(Array.prototype);
+  var F = function () { };
+  console.log(F.prototype);
+
+  // 访问实例的原型
+  var a = {};
+  console.log(a.__proto__);
+  // ES5的 Object.getPrototypeOf
+  console.log(Object.getPrototypeOf([]));
+  // constructor
+  console.log([].constructor.prototype);
+
+  // 原型继承
+
+  // 定义一个类和它的原型
+  var Foo = function () { };
+  Foo.prototype.bar = function () {
+    console.log("haha");
+  };
+  Foo.prototype.foo = function () {
+    console.log("foo");
+  };
+  var foo = new Foo();
+  foo.bar();
+  foo.foo();
+
+  // 继承 Foo
+  var SuperFoo = function () {
+    Foo.apply(this, arguments);
+  };
+  SuperFoo.prototype = new Foo();
+  SuperFoo.prototype.bar = function () {
+    console.log("haha, haha");
+  }
+  var superFoo = new SuperFoo();
+  superFoo.foo();
+  superFoo.bar();
+
+</script>
+</html>
