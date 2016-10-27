@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Array</title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+  // 数组本质上是 object
+  console.log(typeof []);
+
+  // 通过 constructor 判断数组
+  console.log([].constructor);
+
+
+  // ECMAScript 5 新方法
+  var a = [1, 2, 3];
+
+  // 对每个元素调用指定函数
+  var b = a.map(function (x) {
+    return x * x;
+  });
+  console.log(b);
+
+  // 用指定函数对数组进行聚合,返回单个值
+  var b1 = a.reduce(function (x, y) {
+    return x + y;
+  }, 0);
+  console.log(b1);
+
+  // 函数返回的布尔值决定返回的数组是否包含元素
+  var c = a.filter(function (x) {
+    return x % 2 != 0;
+  });
+  console.log(c);
+
+  // 对每个元素调用指定函数, 全部调用返回True则结果为True
+  var d = a.every(function (x) {
+    return x % 2 != 0;
+  });
+  console.log(d);
+
+  // 对每个元素调用指定函数, 只要有调用返回True则结果为True
+  var e = a.some(function (x) {
+    return x % 2 != 0;
+  });
+  console.log(e);
+</script>
+</html>
