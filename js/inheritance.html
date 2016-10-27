@@ -10,7 +10,8 @@
 <script type="text/javascript">
   // 访问构造函数的原型
   console.log(Array.prototype);
-  var F = function () { };
+  var F = function () {
+  };
   console.log(F.prototype);
 
   // 访问实例的原型
@@ -24,7 +25,8 @@
   // 原型继承
 
   // 定义一个类和它的原型
-  var Foo = function () { };
+  var Foo = function () {
+  };
   Foo.prototype.bar = function () {
     console.log("haha");
   };
@@ -43,9 +45,80 @@
   SuperFoo.prototype.bar = function () {
     console.log("haha, haha");
   }
+  SuperFoo.prototype.hello = function () {
+    console.log("world");
+  }
   var superFoo = new SuperFoo();
   superFoo.foo();
   superFoo.bar();
+  superFoo.hello();
 
+
+  // 原型链
+  // superFoo本身 => SuperFoo.prototype => Foo.prototype => Object.prototype
+  console.log(superFoo.hasOwnProperty("bar"));
+  console.log(Object.getOwnPropertyNames(superFoo));
+  console.log(Object.getOwnPropertyDescriptor(superFoo));
+
+
+  // 继承的复杂例子
+  var extend = function (Base) {
+    var Class = function () {
+      Base.apply(this, arguments);
+    }, F;
+    if (Object.create) {
+      Class.prototype = Object.create(Base.prototype);
+    } else {
+      F = function () { };
+      F.prototype = Base.prototype;
+      Class.prototype = new F();
+    }
+    Class.prototype.constructor = Class;
+    return Class;
+  };
+
+  var merge = function (target, source) {
+    var k;
+    for (k in source) {
+      if (source.hasOwnProperty(k)) {
+        target[k] = source[k];
+      }
+    }
+    return target;
+  };
+
+  // Base constructor
+  var XObject = function () { };
+
+  XObject.extend = function (props) {
+    var Class = extend(this);
+    if (props) {
+      merge(Class.prototype, props);
+    }
+    Class.extend = XObject.extend;
+    return Class;
+  }
+
+  var Foo = XObject.extend({
+    bar: function () {
+      return "bar";
+    },
+    name: "foo"
+  });
+
+  var SuperFoo = Foo.extend({
+    name: "superfoo",
+    bar: function () {
+      return "super bar";
+    }
+  });
+
+  var foo = new Foo();
+  console.log(foo.bar());
+  console.log(foo.name);
+
+  var superFoo = new SuperFoo();
+  console.log(superFoo.bar());
+  console.log(superFoo.name);
 </script>
 </html>
