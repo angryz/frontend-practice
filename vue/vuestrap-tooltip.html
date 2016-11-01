@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>VueStrap</title>
+  <link href="https://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div id="app" class="container">
+  <tooltip effect="scale" placement="bottom"
+           content="Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do eiusmod">
+    <button class="btn btn-default">tooltip on bottom</button>
+  </tooltip>
+</div>
+
+<script src="https://cdn.bootcss.com/vue/1.0.8/vue.min.js"></script>
+<script src="https://cdn.bootcss.com/vue-strap/1.1.29/vue-strap.min.js"></script>
+<script>
+  var vm = new Vue({
+    el: "#app",
+    components: {
+      tooltip: VueStrap.tooltip
+    }
+  })
+</script>
+</body>
+</html>
