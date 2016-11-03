@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>appendChild vs innerHTML</title>
+  <script type="text/javascript" src="https://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<body>
+<div id="app">
+</div>
+</body>
+
+<script type="text/javascript">
+  var batch = 10;
+  var o = document.getElementById("app");
+
+  // 1 - 1
+  fillWithElements();
+  var begin = window.performance.now();
+  var children = o.childNodes;
+  for (var i = 0; i < children.length; i++) {
+    o.removeChild(children[i]);
+  }
+  var end = window.performance.now();
+  console.log(end - begin);
+
+  // 1 - 2 : second
+  fillWithElements();
+  begin = window.performance.now();
+  while (o.firstChild) {
+    o.removeChild(o.firstChild);
+  }
+  end = window.performance.now();
+  console.log(end - begin);
+
+  // 2 - 1 : slowest
+  fillWithElements();
+  begin = window.performance.now();
+  for (var i = 0, imax = $(o).children().length; i < imax; i++) {
+    $(o).children()[0].remove();
+  }
+  end = window.performance.now();
+  console.log(end - begin);
+
+  // 2 - 2 : fastest
+  fillWithElements();
+  begin = window.performance.now();
+  $(o).empty();
+  end = window.performance.now();
+  console.log(end - begin);
+
+
+  function fillWithElements() {
+    o.innerHTML = '';
+    var aElems = [];
+    for (var i = 0; i < 10000; i++) {
+      aElems.push(text(document.createElement('a'), 'Link ' + i));
+      aElems.push(document.createTextNode(' | '));
+    }
+    var oFrag = document.createDocumentFragment();
+    for (var i = 0, imax = aElems.length; i < imax; i++) {
+      oFrag.appendChild(aElems[i]);
+    }
+    o.appendChild(oFrag.cloneNode(true));
+    console.log(aElems.length);
+  }
+
+  function text(node, txt) {
+    node.appendChild(document.createTextNode(txt));
+    return node;
+  }
+
+
+  console.log("done");
+</script>
+</html>
