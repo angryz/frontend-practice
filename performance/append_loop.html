@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>appendChild vs innerHTML</title>
+  <title>appendChild with loop</title>
   <script type="text/javascript" src="https://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
 </head>
 <body>
@@ -11,7 +11,7 @@
 </body>
 
 <script type="text/javascript">
-  var loop = 100;
+  var loop = 10;
   var o = document.getElementById("app");
   var aElems = [
     text(document.createElement('b'), 'Links:'),
@@ -26,7 +26,7 @@
   sElems += '<hr>';
   console.log(aElems.length);
 
-  // 1
+  // 1 : fastest
   o.innerHTML = '<p>1</p>';
   var begin = window.performance.now();
   for (var j = 0; j < loop; j++) {
@@ -99,6 +99,7 @@
   var end = window.performance.now();
   console.log(end - begin);
 
+  // create node
   function text(node, txt) {
     node.appendChild(document.createTextNode(txt));
     return node;
