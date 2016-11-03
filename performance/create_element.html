@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Create Element</title>
+  <script type="text/javascript" src="https://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<body>
+<div id="app"></div>
+</body>
+<script type="text/javascript">
+  var loop = 100, begin, end;
+  var o = document.getElementById('app');
+
+  // fast
+  begin = window.performance.now();
+  for (var i = 0; i < loop; i++) {
+    var el = createEl(i);
+  }
+  end = window.performance.now();
+  console.log(end - begin);
+
+  // slow
+  begin = window.performance.now();
+  for (var i = 0; i < loop; i++) {
+    var el = jCreateEl(i);
+  }
+  end = window.performance.now();
+  console.log(end - begin);
+
+  function createEl(i) {
+    var el = document.createElement('div');
+    var elP = document.createElement('p');
+    var elSpan = document.createElement('span');
+    var elTxt = document.createTextNode('foobar-' + i);
+    elSpan.appendChild(elTxt);
+    elP.appendChild(elSpan);
+    el.appendChild(elP);
+    return el;
+  }
+
+  function jCreateEl(i) {
+    var el = $('<div></div>');
+    var elP = $('<p></p>');
+    var elSpan = $('<span></span>');
+    var elTxt = 'foobar-' + i;
+    elSpan.text(elTxt);
+    elP.append(elSpan);
+    el.append(elP);
+    return el;
+  }
+</script>
+</html>
