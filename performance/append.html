@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>appendChild vs innerHTML</title>
+  <script type="text/javascript" src="https://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<body>
+<div id="app">
+</div>
+</body>
+
+<script type="text/javascript">
+  var o = document.getElementById("app");
+  o.innerHTML = '';
+  var begin = window.performance.now();
+  var aElems = [
+    text(document.createElement('b'), 'Links:'),
+    document.createTextNode(' '),
+    text(document.createElement('a'), 'Link A'),
+    document.createTextNode(' | '),
+    text(document.createElement('a'), 'Link B'),
+    document.createTextNode(' | '),
+    text(document.createElement('a'), 'Link C'),
+    document.createElement('hr')
+  ];
+  var oFrag = document.createDocumentFragment();
+  for (var i = 0, imax = aElems.length; i < imax; i++) {
+    oFrag.appendChild(aElems[i]);
+  }
+  o.appendChild(oFrag);
+  var end = window.performance.now();
+  console.log(end - begin);
+
+  o.innerHTML = '';
+  var $o = $("#app");
+  begin = window.performance.now();
+  var $aElems = [
+    $('<b>Links:</b>'),
+    $(document.createTextNode(' ')),
+    $('<a>Link A</a>'),
+    $(document.createTextNode(' | ')),
+    $('<a>Link B</a>'),
+    $(document.createTextNode(' | ')),
+    $('<a>Link C</a>'),
+    $('<hr>')
+  ];
+  for (var i = 0, imax = $aElems.length; i < imax; i++) {
+    $o.append($aElems[i]);
+  }
+  var end = window.performance.now();
+  console.log(end - begin);
+
+  function text(node, txt) {
+    node.appendChild(document.createTextNode(txt));
+    return node;
+  }
+</script>
+</html>
