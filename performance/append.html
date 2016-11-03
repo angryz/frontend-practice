@@ -13,41 +13,47 @@
 <script type="text/javascript">
   var o = document.getElementById("app");
   o.innerHTML = '';
-  var begin = window.performance.now();
   var aElems = [
     text(document.createElement('b'), 'Links:'),
-    document.createTextNode(' '),
-    text(document.createElement('a'), 'Link A'),
-    document.createTextNode(' | '),
-    text(document.createElement('a'), 'Link B'),
-    document.createTextNode(' | '),
-    text(document.createElement('a'), 'Link C'),
-    document.createElement('hr')
   ];
+  var sElems = '<b>Links:</b>';
+  for (var i = 0; i < 10000; i++) {
+    aElems.push(document.createTextNode(' | '));
+    aElems.push(text(document.createElement('a'), 'Link ' + i));
+    sElems += ' | <a>Link ' + i + '</a>';
+  }
+  aElems.push(document.createElement('hr'));
+  sElems += '<hr>';
+  console.log(aElems.length);
+
+  var begin = window.performance.now();
   var oFrag = document.createDocumentFragment();
   for (var i = 0, imax = aElems.length; i < imax; i++) {
     oFrag.appendChild(aElems[i]);
   }
-  o.appendChild(oFrag);
+  o.appendChild(oFrag.cloneNode(true));
   var end = window.performance.now();
   console.log(end - begin);
 
   o.innerHTML = '';
-  var $o = $("#app");
   begin = window.performance.now();
-  var $aElems = [
-    $('<b>Links:</b>'),
-    $(document.createTextNode(' ')),
-    $('<a>Link A</a>'),
-    $(document.createTextNode(' | ')),
-    $('<a>Link B</a>'),
-    $(document.createTextNode(' | ')),
-    $('<a>Link C</a>'),
-    $('<hr>')
-  ];
-  for (var i = 0, imax = $aElems.length; i < imax; i++) {
-    $o.append($aElems[i]);
+  for (var i = 0, imax = aElems.length; i < imax; i++) {
+    o.appendChild(aElems[i].cloneNode(true));
   }
+  var end = window.performance.now();
+  console.log(end - begin);
+
+  o.innerHTML = '';
+  begin = window.performance.now();
+  for (var i = 0, imax = aElems.length; i < imax; i++) {
+    $(o).append($(aElems[i]));
+  }
+  var end = window.performance.now();
+  console.log(end - begin);
+
+  o.innerHTML = '';
+  begin = window.performance.now();
+  o.innerHTML = sElems;
   var end = window.performance.now();
   console.log(end - begin);
 
@@ -55,5 +61,8 @@
     node.appendChild(document.createTextNode(txt));
     return node;
   }
+
+
+  console.log("done");
 </script>
 </html>
