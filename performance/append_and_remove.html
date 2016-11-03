@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Append + Remove</title>
+  <style type="text/css">
+    button {
+      width: 72px;
+      height: 30px;
+      font-size: 1.1em;
+    }
+    #output div {
+      width: 80px;
+      height: 40px;
+      margin: 4px;
+      border: 1px solid #999;
+      border-radius: 4px;
+      background-color: rgb(33, 197, 237);
+      color: #fff;
+      text-align: center;
+      float: left;
+    }
+    #output div p {
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+<button onclick="stop()">Stop</button>
+<div id="output">
+</div>
+</body>
+<script type="text/javascript">
+
+  var loop1, loop2, count = 0;
+  var o = document.getElementById("output");
+
+  document.addEventListener("DOMContentLoaded", function (event) {
+    loop1 = setInterval('appendElems(500)', 500);
+    loop2 = setInterval('cutElems(2800)', 2800);
+  });
+
+  function stop() {
+    clearInterval(loop1);
+    clearInterval(loop2);
+    console.log("Stopped");
+  }
+
+  function appendElems(n) {
+    count++;
+    var now = window.performance.now();
+    var aElems = [];
+    for (var i = 0; i < n; i++)
+      aElems.push(createElem(count + "-" + i));
+    var oFrag = document.createDocumentFragment();
+    for (var i = 0, imax = aElems.length; i < imax; i++) {
+      oFrag.appendChild(aElems[i]);
+    }
+    o.appendChild(oFrag.cloneNode(true));
+    console.log("append cost: " + (window.performance.now() - now));
+  }
+
+  function cutElems(n) {
+    var now = window.performance.now();
+    var i = 0;
+    while (i++ < n && o.firstChild) {
+      o.removeChild(o.firstChild);
+    }
+    console.log("cutting cost: " + (window.performance.now() - now));
+  }
+
+  function createElem(i) {
+    var el = document.createElement('div');
+    var elP = document.createElement('p');
+    var elSpan = document.createElement('span');
+    var elTxt = document.createTextNode('foo-' + i);
+    elSpan.appendChild(elTxt);
+    elP.appendChild(elSpan);
+    el.appendChild(elP);
+    return el;
+  }
+
+</script>
+</html>
