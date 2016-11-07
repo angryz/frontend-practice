@@ -7,14 +7,14 @@ function Person(firstName) {
     // properties
     this.firstName = firstName;
     // constructor
-    alert("Person instantiated");
+    console.log("Person instantiated");
 }
 // or
 //var Person = function () { }
 
 // Method
 Person.prototype.sayHello = function () {
-    alert("Hello, I'm " + this.firstName);
+    console.log("Hello, I'm " + this.firstName);
 };
 
 // Object ( Instance of Class )
@@ -23,3 +23,6 @@ var person2 = new Person("Bob");
 
 person1.sayHello();
 person2.sayHello();
+
+var helloFunc = person1.sayHello;
+helloFunc.call(person2);
