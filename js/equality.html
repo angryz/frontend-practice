@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Equality comparisons and sameness</title>
+</head>
+<body>
+<script type="text/javascript">
+  var num = 0;
+  var obj = new String("0");
+  var str = "0";
+  var b = false;
+
+  console.log(num == obj);
+  console.log(num === obj);
+  console.log(num == str);
+  console.log(num === str);
+  console.log(obj == str);
+  console.log(obj === str);
+
+  console.log(null == undefined);
+  console.log(null === undefined);
+  console.log(b == null);
+  console.log(b === null);
+</script>
+</body>
+</html>
