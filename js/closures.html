@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Closures</title>
+</head>
+<body>
+<script type="text/javascript">
+  // 词法作用域
+  function init() {
+    var name = "Foobar";
+    function displayName() {
+      console.log(name);
+    }
+    displayName();
+  }
+  init();
+</script>
+</body>
+</html>
