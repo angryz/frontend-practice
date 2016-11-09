@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>box-sizing</title>
+  <style type="text/css">
+    .border-box {
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+
+    .simple {
+      width: 500px;
+      margin: 20px auto;
+      padding: 0;
+      border: solid blue 1px;
+    }
+
+    .fancy {
+      width: 500px;
+      margin: 20px auto;
+      padding: 50px;
+      border: solid blue 10px;
+    }
+  </style>
+</head>
+<body>
+<div class="simple">class="simple"</div>
+<div class="fancy">class="fancy"</div>
+<div class="simple border-box">class="simple border-box"</div>
+<div class="fancy border-box">class="fancy border-box"</div>
+</body>
+</html>
