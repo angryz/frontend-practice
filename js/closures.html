@@ -19,13 +19,22 @@
   </style>
 </head>
 <body>
-<p>Some paragraph text</p>
-<h1>some heading 1 text</h1>
-<h2>some heading 2 text</h2>
+<div>
+  <p>Some paragraph text</p>
+  <h1>some heading 1 text</h1>
+  <h2>some heading 2 text</h2>
 
-<a href="#" id="size-12">12</a>
-<a href="#" id="size-14">14</a>
-<a href="#" id="size-16">16</a>
+  <a href="#" id="size-12">12</a>
+  <a href="#" id="size-14">14</a>
+  <a href="#" id="size-16">16</a>
+</div>
+
+<div>
+  <p id="help">Helpful notes will appear here</p>
+  <p>E-mail: <input type="text" id="email" name="email"></p>
+  <p>Name: <input type="text" id="name" name="name"></p>
+  <p>Age: <input type="text" id="age" name="age"></p>
+</div>
 
 <script type="text/javascript">
   // 词法作用域
@@ -79,13 +88,14 @@
   document.getElementById('size-14').onclick = size14;
   document.getElementById('size-16').onclick = size16;
 
-
   // module pattern
   var Counter = (function () {
     var privateCounter = 0;
+
     function changeBy(val) {
       privateCounter += val;
     }
+
     return {
       increment: function () {
         changeBy(1);
@@ -110,9 +120,11 @@
   // multiple instances
   var makeCounter = function () {
     var privateCounter = 0;
+
     function changeBy(val) {
       privateCounter += val;
     }
+
     return {
       increment: function () {
         changeBy(1);
@@ -136,6 +148,42 @@
   Counter1.decrement();
   console.log("Counter1: " + Counter1.value());
   console.log("Counter2: " + Counter2.value());
+
+
+  // 循环中的常见错误
+  function showHelp(help) {
+    document.getElementById('help').innerHTML = help;
+  }
+
+  function makeHelpCallback(help) {
+    // 每个上下文创建一个闭包对象
+    return function () {
+      showHelp(help);
+    }
+  }
+
+  function setupHelp() {
+    var helpText = [
+      {'id': 'email', 'help': 'Your e-mail address'},
+      {'id': 'name', 'help': 'Your full name'},
+      {'id': 'age', 'help': 'Your age (you must be over 16)'}
+    ];
+
+    for (var i = 0; i < helpText.length; i++) {
+      var item = helpText[i];
+      // 错误的写法: 赋给 onfocus 是闭包（setupHelp）中的匿名函数而不是闭包对象, 在闭包（setupHelp）中一共创建了三个匿名函数，但是它们都共享同一个环境（item）
+      /*
+      document.getElementById(item.id).onfocus = function() {
+        showHelp(item.help);
+      }
+      */
+
+      // 正确的写法: 所有的回调不再共享同一个环境， makeHelpCallback 函数为每一个回调创建一个新的环境
+      document.getElementById(item.id).onfocus = makeHelpCallback(item.help);
+    }
+  }
+
+  setupHelp();
 </script>
 </body>
 </html>
