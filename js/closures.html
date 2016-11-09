@@ -61,8 +61,8 @@
   }
   var add5 = makeAdder(5);
   var add10 = makeAdder(10);
-  console.log(add5(2));
-  console.log(add10(2));
+  console.log("5 + 2 = " + add5(2));
+  console.log("10 + 2 = " + add10(2));
 
   // Demo
   function makeSizer(size) {
@@ -78,6 +78,34 @@
   document.getElementById('size-12').onclick = size12;
   document.getElementById('size-14').onclick = size14;
   document.getElementById('size-16').onclick = size16;
+
+
+  // module pattern
+  var Counter = (function () {
+    var privateCounter = 0;
+    function changeBy(val) {
+      privateCounter += val;
+    }
+    return {
+      increment: function () {
+        changeBy(1);
+      },
+      decrement: function () {
+        changeBy(-1);
+      },
+      value: function () {
+        return privateCounter;
+      }
+    }
+  }());
+
+  console.log(Counter.value());
+  Counter.increment();
+  Counter.increment();
+  console.log(Counter.value());
+  Counter.decrement();
+  console.log(Counter.value());
+  //Counter.changeBy(2); will throw Uncaught TypeError: Counter.changeBy is not a function
 </script>
 </body>
 </html>
