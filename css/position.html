@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Position</title>
+  <style type="text/css">
+    #container {
+      width: 800px;
+      height: 680px;
+      margin: 20px auto;
+      padding: 20px;
+      border: solid black 1px;
+    }
+    #relative {
+      position: relative;
+      left: 50px;
+      top: 50px;
+      width: 600px;
+      height: 480px;
+      padding: 5px;
+      border: solid blue 1px;
+    }
+    #absolute {
+      position: absolute;
+      left: 50px;
+      top: 50px;
+      width: 400px;
+      height: 200px;
+      padding: 5px;
+      border: solid green 1px;
+    }
+    #fixed {
+      position: fixed;
+      left: 50px;
+      top: 50px;
+      width: 400px;
+      height: 200px;
+      padding: 5px;
+      border: solid red 1px;
+    }
+  </style>
+</head>
+<body>
+<div id="container">
+  <div id="relative">
+    I'm relative.
+    <div id="absolute">
+      I'm absolute.
+    </div>
+  </div>
+  <div id="fixed">
+    I'm fixed.
+  </div>
+</div>
+</body>
+</html>
