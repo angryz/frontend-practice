@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Responsive Design</title>
+  <style type="text/css">
+    * {
+      box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+    }
+    .container {
+      width: 80%;
+      margin: 20px auto;
+      border: solid seagreen 2px;
+    }
+    nav {
+      border: solid deeppink 2px;
+    }
+    section {
+      border: solid orange 2px;
+    }
+    @media screen and (min-width: 600px) {
+      nav {
+        float: left;
+        width: 25%;
+      }
+      section {
+        margin-left: 25%;
+      }
+    }
+    @media screen and (max-width: 599px){
+      nav li {
+        display: inline;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <nav>
+    <ul>
+      <li>Home</li>
+      <li>Foobar</li>
+      <li>Articles</li>
+      <li>Links</li>
+      <li>Favorites</li>
+    </ul>
+  </nav>
+
+  <section>响应式设计 (Responsive Design) 窗口布局的一个 DEMO. 利用<b>媒体查询 (media queries)</b> 达到效果。</section>
+  <section>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi lorem egestas odio, vitae scelerisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec congue eget, auctor vitae massa. Fusce luctus vestibulum augue ut aliquet. Mauris ante ligula, facilisis sed ornare eu, lobortis in odio. Praesent convallis urna a lacus interdum ut hendrerit risus congue. Nunc sagittis dictum nisi, sed ullamcorper ipsum dignissim ac. In at libero sed nunc venenatis imperdiet sed ornare turpis. Donec vitae dui eget tellus gravida venenatis. Integer fringilla congue eros non fermentum. Sed dapibus pulvinar nibh tempor porta. Cras ac leo purus. Mauris quis diam velit.</section>
+</div>
+</body>
+</html>
