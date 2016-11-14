@@ -19,7 +19,9 @@
 <script type="text/javascript">
   var myCm = CodeMirror(document.body, {
     value: "function foobar() { return 1111; }\n",
-    mode: "javascript"
+    mode: "javascript",
+    lineWrapping: true,
+    lineNumbers: true
   });
 
   var myCm1 = CodeMirror.fromTextArea(document.getElementById("myTextarea"));
