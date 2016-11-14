@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Configuration</title>
+  <link rel="stylesheet"
+        href="https://cdn.bootcss.com/selectize.js/0.12.4/css/selectize.default.min.css">
+  <script type="text/javascript" src="https://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+  <script src="https://cdn.bootcss.com/selectize.js/0.12.4/js/standalone/selectize.min.js"></script>
+  <style type="text/css">
+    .control-group {
+      width: 600px;
+      margin: 10px auto 40px;
+      padding: 20px;
+      border: solid lightskyblue 2px;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+<div class="control-group">
+  <select id="app"></select> <select id="store"></select>
+</div>
+<script type="text/javascript">
+  var selectApp, $selectApp, selectStore, $selectStore;
+
+  $selectApp = $("#app").selectize({
+    valueField: 'id',
+    labelField: 'text',
+    placeholder: "Please select...",
+    searchField: ['id', 'text'],
+    options: [
+      {id: 1, text: 'Apple'},
+      {id: 2, text: 'Banana'},
+      {id: 3, text: 'Orange'},
+      {id: 4, text: 'pear'}
+    ],
+    onChange: function (value) {
+      if (!value) return;
+      selectStore.enable();
+      selectStore.clearOptions();
+      selectStore.load(function (callback) {
+        var i, arr = [];
+        for (i = 1; i < 21; i++) {
+          arr.push({id: i, text: value + " - " + i});
+        }
+        callback(arr);
+      });
+    }
+  });
+
+  $selectStore = $("#store").selectize({
+    valueField: 'id',
+    labelField: 'text',
+    placeholder: "Please select...",
+    searchField: ['id', 'text'],
+  });
+
+  selectApp = $selectApp[0].selectize;
+  selectStore = $selectStore[0].selectize;
+
+  selectStore.disable();
+</script>
+</body>
+</html>
