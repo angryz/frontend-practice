@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>bootstrap-daterangepicker</title>
-  <link href="https://cdn.bootcss.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css"
+  <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
         rel="stylesheet">
   <link href="https://cdn.bootcss.com/bootstrap-daterangepicker/2.1.24/daterangepicker.min.css"
         rel="stylesheet">
@@ -11,11 +11,36 @@
   <script src="https://cdn.bootcss.com/bootstrap-daterangepicker/2.1.24/moment.min.js"></script>
   <script
       src="https://cdn.bootcss.com/bootstrap-daterangepicker/2.1.24/daterangepicker.min.js"></script>
+  <style>
+    .row {
+      width: 300px;
+      margin: 10px auto;
+    }
+
+    .datetimeRange {
+      height: 30px;
+      padding: 5px 10px;
+      cursor: pointer;
+      border: solid black 1px;
+      border-radius: 4px;
+    }
+  </style>
 </head>
 <body>
 <div class="container">
-  <input name="daterange" type="text" class="col-lg-4 form-control input-sm">
+  <div class="row">
+    <input name="daterange" type="text" class="form-control input-sm">
+  </div>
+
+  <div class="row">
+    <div id="logrange" class="datetimeRange">
+      <span class="glyphicon glyphicon-calendar"></span>&nbsp;
+      <span id="lograngeshow"></span> <b class="caret"></b>
+    </div>
+  </div>
 </div>
+
+
 </body>
 <script>
   $('input[name="daterange"]').daterangepicker(
@@ -30,5 +55,35 @@
         alert("A new date range was chosen: " + start.format('YYYY-MM-DD HH:mm') + " to " + end.format('YYYY-MM-DD HH:mm'));
       }
   );
+
+  $(function () {
+    var start = moment().subtract(29, 'days');
+    var end = moment();
+    console.log("start: ", start);
+    console.log("end: ", end);
+
+    function cb(start, end) {
+      $('#logrange span#lograngeshow').html(start.format('YYYY-MM-DD HH:mm') + ' - ' + end.format('YYYY-MM-DD HH:mm'));
+    }
+
+    $('#logrange').daterangepicker({
+      startDate: start,
+      endDate: end,
+      ranges: {
+        'Today': [moment(), moment()],
+        'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+        'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+        'This Month': [moment().startOf('month'), moment().endOf('month')],
+        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+      }
+    }, cb);
+
+    cb(start, end);
+
+  });
+
+
 </script>
+
 </html>
