@@ -20,12 +20,14 @@
 <script>
   $('input[name="daterange"]').daterangepicker(
       {
-        locale: {format: 'YYYY-MM-DD'},
+        timePicker: true,
+        timePickerIncrement: 5,
+        locale: {format: 'YYYY-MM-DD HH:mm'},
         startDate: '2016-01-01',
         endDate: '2016-12-31'
       },
       function (start, end, label) {
-        alert("A new date range was chosen: " + start.format('YYYY-MM-DD') + " to " + end.format('YYYY-MM-DD'));
+        alert("A new date range was chosen: " + start.format('YYYY-MM-DD HH:mm') + " to " + end.format('YYYY-MM-DD HH:mm'));
       }
   );
 </script>
